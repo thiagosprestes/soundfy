@@ -14,10 +14,14 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "react/jsx-filename-extension": [
-      "warn",
+    "import/extensions": [
+      "off",
+      "ignorePackages",
       {
-        "extensions": [".jsx", ".js"]
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
       }
     ],
     "import/prefer-default-export": "off",
@@ -26,7 +30,15 @@
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
     "no-param-reassign": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "array-bracket-spacing": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-filename-extension": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/no-unstable-nested-components": "off",
+    "no-shadow": "off",
+    "no-unused-vars": "off"
   },
   "settings": {
     "import/resolver": {
@@ -34,7 +46,8 @@
         "paths": ["src"],
         "alias": {
           "~": "./src"
-        }
+        },
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
   }
