@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { Button, ButtonText, Container, SoundFyLogo } from './styles';
 import FacebookIcon from '../../../assets/facebook-logo.svg';
 import GoogleIcon from '../../../assets/google-logo.svg';

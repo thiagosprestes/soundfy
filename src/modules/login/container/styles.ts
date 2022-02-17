@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { LoginOption } from '.';
 import SoundFy from '../../../assets/soundfy-logo.svg';
+import { Text } from '../../../components/Text/styles';
 import { colors, defaultPadding } from '../../../styles/styleguide';
 
 interface ButtonTextProps {
@@ -27,12 +28,12 @@ export const Button = styled.TouchableOpacity`
   margin-bottom: 18px;
 `;
 
-export const ButtonText = styled.Text<ButtonTextProps>`
+export const ButtonText = styled(Text)<ButtonTextProps>`
   color: ${props =>
     props.type === LoginOption.Facebook
       ? colors.loginWithFacebookButtonText
       : colors.grey};
-  font-weight: bold;
   flex: 1;
   text-align: center;
+  font-weight: bold;
 `;

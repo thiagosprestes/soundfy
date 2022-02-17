@@ -38,7 +38,8 @@
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/no-unstable-nested-components": "off",
     "no-shadow": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "react/require-default-props": "off"
   },
   "settings": {
     "import/resolver": {
