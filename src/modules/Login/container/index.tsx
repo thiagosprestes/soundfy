@@ -14,9 +14,13 @@ interface LoginButtonProps {
   icon: React.ReactNode;
 }
 
-const LoginContainer = () => {
+interface LoginContainerProps {
+  onLogin: (type: LoginOption) => void;
+}
+
+const LoginContainer = ({ onLogin }: LoginContainerProps) => {
   const LoginButton = ({ type, icon }: LoginButtonProps) => (
-    <Button>
+    <Button onPress={() => onLogin(type)}>
       {icon}
       <ButtonText type={type}>Entrar com {type}</ButtonText>
     </Button>
