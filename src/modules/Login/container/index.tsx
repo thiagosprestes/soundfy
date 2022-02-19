@@ -1,36 +1,44 @@
 import React from 'react';
-import { Text } from 'react-native';
 import { Button, ButtonText, Container, SoundFyLogo } from './styles';
-import FacebookIcon from '../../../assets/facebook-logo.svg';
 import GoogleIcon from '../../../assets/google-logo.svg';
-
-export enum LoginOption {
-  Facebook = 'Facebook',
-  Google = 'Google',
-}
-
-interface LoginButtonProps {
-  type: LoginOption;
-  icon: React.ReactNode;
-}
+import { ComponentState } from '../../../utils/globalTypes';
+import Error from '../../../components/Error';
+import Loading from '../../../components/Loading';
 
 interface LoginContainerProps {
-  onLogin: (type: LoginOption) => void;
+  componentState: ComponentState;
+  onLogin: () => void;
+  onRetry: () => void;
 }
 
-const LoginContainer = ({ onLogin }: LoginContainerProps) => {
-  const LoginButton = ({ type, icon }: LoginButtonProps) => (
-    <Button onPress={() => onLogin(type)}>
-      {icon}
-      <ButtonText type={type}>Entrar com {type}</ButtonText>
-    </Button>
+const LoginContainer = ({
+  componentState,
+  onLogin,
+  onRetry,
+}: LoginContainerProps) => {
+  const renderDefault = (
+    <>
+      <SoundFyLogo />
+      <Button onPress={onLogin}>
+        <GoogleIcon />
+        <ButtonText>Entrar com Google</ButtonText>
+      </Button>
+    </>
   );
+
+  const renderLoading = <Loading />;
+
+  const renderError = <Error onRetry={onRetry} />;
 
   return (
     <Container>
-      <SoundFyLogo />
-      <LoginButton type={LoginOption.Facebook} icon={<FacebookIcon />} />
-      <LoginButton type={LoginOption.Google} icon={<GoogleIcon />} />
+      {
+        {
+          [ComponentState.default]: renderDefault,
+          [ComponentState.loading]: renderLoading,
+          [ComponentState.error]: renderError,
+        }[componentState]
+      }
     </Container>
   );
 };
