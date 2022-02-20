@@ -1,14 +1,19 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Routes } from './types/navigationTypes';
 import Home from '../modules/Home';
+import BottomBar from '../components/BottomBar';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const AppNavigation = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }}>
-    <Stack.Screen name={Routes.App.Home} component={Home} />
-  </Stack.Navigator>
+  <Tab.Navigator
+    tabBar={props => <BottomBar {...props} />}
+    screenOptions={{ headerShown: false }}
+  >
+    <Tab.Screen name={Routes.App.Home} component={Home} />
+    <Tab.Screen name={Routes.App.Search} component={Home} />
+  </Tab.Navigator>
 );
 
 export default AppNavigation;

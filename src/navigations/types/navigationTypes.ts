@@ -4,5 +4,6 @@ export const Routes = {
   },
   App: {
     Home: 'Home',
+    Search: 'Search',
   },
 };
