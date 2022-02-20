@@ -16,6 +16,7 @@
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "@reduxjs/toolkit": "^1.7.2",
+    "lottie-react-native": "^5.0.1",
     "react": "17.0.2",
     "react-native": "0.67.2",
     "react-native-dotenv": "^3.3.1",

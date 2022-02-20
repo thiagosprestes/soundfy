@@ -3,18 +3,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type UserState = FirebaseAuthTypes.UserCredential;
 
-const initialState: Partial<UserState['user']> = {
-  displayName: '',
-  email: '',
-};
+const initialState: Partial<UserState['user']> = {};
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     storeUserData(state, action: PayloadAction<Partial<UserState['user']>>) {
-      state.displayName = action.payload.displayName;
-      state.email = action.payload.email;
+      state = action.payload;
     },
   },
 });

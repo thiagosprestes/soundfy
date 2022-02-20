@@ -13,15 +13,19 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handleOnLogin = async () => {
+    setComponentState(ComponentState.loading);
+
     try {
       const { idToken } = await GoogleSignin.signIn();
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-      const googleAuthResponse = await auth().signInWithCredential(
-        googleCredential,
-      );
+      const { user } = await auth().signInWithCredential(googleCredential);
 
-      dispatch(storeUserData(googleAuthResponse.user));
+      const { displayName, email } = user;
+
+      dispatch(storeUserData({ displayName, email }));
+
+      setComponentState(ComponentState.default);
     } catch (error) {
       setComponentState(ComponentState.error);
     }
