@@ -9,8 +9,9 @@ import Loading from '../../../components/Loading';
 interface HomeContainerProps {
   albums: Album[];
   artists: Artist[];
-  songs: Song[];
   componentState: ComponentState;
+  songs: Song[];
+  userName: string;
 }
 
 const HomeContainer = ({
@@ -18,10 +19,11 @@ const HomeContainer = ({
   artists,
   componentState,
   songs,
+  userName,
 }: HomeContainerProps) => {
   const renderDefault = (
     <ScrollView showsVerticalScrollIndicator={false}>
-      <Greeting size={22}>Olá, Luke Skywalker</Greeting>
+      <Greeting size={22}>Olá, {userName}</Greeting>
       <ItemsCarousel items={songs} title="Músicas em destaque" />
       <ItemsCarousel
         isImageRounded

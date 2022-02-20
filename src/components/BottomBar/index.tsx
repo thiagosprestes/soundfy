@@ -1,69 +1,47 @@
+/* eslint-disable consistent-return */
 import React from 'react';
-import { Container, Icon, ItemContainer, Label } from './styles';
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import { Container, ItemContainer, Label } from './styles';
 import HomeIcon from '../../assets/icons/home.svg';
 import SearchIcon from '../../assets/icons/search.svg';
-import LibraryIcon from '../../assets/icons/library.svg';
-import SettingsIcon from '../../assets/icons/settings.svg';
 import { colors } from '../../styles/styleguide';
+import { Routes } from '../../navigations/types/navigationTypes';
 
-interface BottomBarItemProps {
-  icon: React.ReactChild;
-  isFocused: boolean;
-  label: string;
-}
+interface BottomBarItemProps extends BottomTabBarProps {}
 
-const BottomBar = ({ state, descriptors, navigation }) => {
-  const BottomBarItem = ({ icon, isFocused, label }: BottomBarItemProps) => (
-    <ItemContainer>
-      {icon}
-      <Label>{label}</Label>
-    </ItemContainer>
-  );
+const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
+  const BottomBarItem = () =>
+    state.routes.map((route, index) => {
+      const isFocused = state.index === index;
+      const iconColor = isFocused ? colors.secondaryBlue : colors.grey;
 
-  return (
-    <Container>
-      {state.routes.map((route, index) => {
-        const { options } = descriptors[route.key];
+      const renderIconAndLabel = {
+        [Routes.App.Home]: {
+          icon: <HomeIcon fill={iconColor} />,
+          label: 'Início',
+        },
 
-        const isFocused = state.index === index;
+        [Routes.App.Search]: {
+          icon: <SearchIcon fill={iconColor} />,
+          label: 'Buscar',
+        },
+      }[route.name];
 
-        const label =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+      const onPress = () => {
+        if (!isFocused) {
+          navigation.navigate(route.name);
+        }
+      };
 
-        const onPress = () => {
-          const event = navigation.emit({
-            type: 'tabPress',
-            target: route.key,
-          });
+      return (
+        <ItemContainer onPress={onPress}>
+          {renderIconAndLabel.icon}
+          <Label>{renderIconAndLabel.label}</Label>
+        </ItemContainer>
+      );
+    });
 
-          if (!isFocused && !event.defaultPrevented) {
-            navigation.navigate(route.name);
-          }
-        };
-
-        const onLongPress = () => {
-          navigation.emit({
-            type: 'tabLongPress',
-            target: route.key,
-          });
-        };
-
-        return (
-          <BottomBarItem
-            isFocused={isFocused}
-            icon={
-              <HomeIcon fill={isFocused ? colors.secondaryBlue : colors.grey} />
-            }
-            label="Início"
-          />
-        );
-      })}
-    </Container>
-  );
+  return <Container>{BottomBarItem()}</Container>;
 };
 
 export default BottomBar;
