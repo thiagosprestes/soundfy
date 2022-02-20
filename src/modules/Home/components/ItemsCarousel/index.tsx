@@ -7,11 +7,11 @@ import {
   ItemsList,
   Title,
 } from './styles';
-import { Album } from '../../types';
+import { Song } from '../../types';
 
 interface ItemsCarouselProps {
   isImageRounded?: boolean;
-  items: Album[];
+  items: Song[];
   title: string;
 }
 
@@ -25,7 +25,7 @@ const ItemsCarousel = ({
     item,
   }: {
     isImageRounded?: boolean;
-    item: Album;
+    item: Song;
   }) => (
     <Item>
       <ItemImage isImageRounded={isImageRounded} source={{ uri: item.cover }} />
