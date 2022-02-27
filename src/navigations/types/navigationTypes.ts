@@ -3,7 +3,12 @@ export const Routes = {
     Login: 'Login',
   },
   App: {
-    Home: 'Home',
+    HomeStack: {
+      itself: 'itself',
+      Home: 'Home',
+      Album: 'Album',
+    },
     Search: 'Search',
+    Album: 'Album',
   },
 };

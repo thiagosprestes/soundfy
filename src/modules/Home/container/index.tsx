@@ -1,16 +1,19 @@
 import React from 'react';
 import { Container, Greeting, ScrollView } from './styles';
-import { Album, Artist, Song } from '../types';
-import ItemsCarousel from '../components/ItemsCarousel';
+import ItemsCarousel, {
+  ItemsListType,
+  ListType,
+} from '../components/ItemsCarousel';
 import { ComponentState } from '../../../utils/globalTypes';
 import Error from '../../../components/Error';
 import Loading from '../../../components/Loading';
 
 interface HomeContainerProps {
-  albums: Album[];
-  artists: Artist[];
+  albums: ItemsListType[];
+  artists: ItemsListType[];
   componentState: ComponentState;
-  songs: Song[];
+  onGoToAlbum: (albumName: string) => void;
+  songs: ItemsListType[];
   userName: string;
 }
 
@@ -18,19 +21,32 @@ const HomeContainer = ({
   albums,
   artists,
   componentState,
+  onGoToAlbum,
   songs,
   userName,
 }: HomeContainerProps) => {
   const renderDefault = (
     <ScrollView showsVerticalScrollIndicator={false}>
       <Greeting size={22}>Olá, {userName}</Greeting>
-      <ItemsCarousel items={songs} title="Músicas em destaque" />
+      <ItemsCarousel
+        items={songs}
+        onGoToAlbum={onGoToAlbum}
+        listType={ListType.Song}
+        title="Músicas em destaque"
+      />
       <ItemsCarousel
         isImageRounded
+        onGoToAlbum={onGoToAlbum}
         items={artists}
+        listType={ListType.Artist}
         title="Artistas em destaque"
       />
-      <ItemsCarousel items={albums} title="Trilhas sonoras épicas" />
+      <ItemsCarousel
+        items={albums}
+        onGoToAlbum={onGoToAlbum}
+        listType={ListType.Album}
+        title="Trilhas sonoras épicas"
+      />
     </ScrollView>
   );
 

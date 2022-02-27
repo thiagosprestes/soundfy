@@ -16,11 +16,10 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
       const iconColor = isFocused ? colors.secondaryBlue : colors.grey;
 
       const renderIconAndLabel = {
-        [Routes.App.Home]: {
+        [Routes.App.HomeStack.itself]: {
           icon: <HomeIcon fill={iconColor} />,
           label: 'Início',
         },
-
         [Routes.App.Search]: {
           icon: <SearchIcon fill={iconColor} />,
           label: 'Buscar',

@@ -9,7 +9,7 @@ const RootNavigation = () => {
 
   return (
     <NavigationContainer>
-      {userData.displayName ? <AppNavigation /> : <AuthNavigation />}
+      {userData.displayName ? <AppNavigation /> : <AppNavigation />}
     </NavigationContainer>
   );
 };

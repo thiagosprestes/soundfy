@@ -7,29 +7,61 @@ import {
   ItemsList,
   Title,
 } from './styles';
-import { Song } from '../../types';
+import { Album, Artist, Song } from '../../types';
+
+export enum ListType {
+  Album = 'Album',
+  Artist = 'Artist',
+  Song = 'Song',
+}
+
+export type ItemsListType = Album & Artist & Song;
 
 interface ItemsCarouselProps {
   isImageRounded?: boolean;
-  items: Song[];
+  items: ItemsListType[];
+  onGoToAlbum: (albumName: string) => void;
+  listType: ListType;
   title: string;
+}
+
+interface ListItemProps {
+  cover: string;
+  isImageRounded?: boolean;
+  onGoToAlbum: (onGoToAlbum: string) => void;
+  name: string;
 }
 
 const ItemsCarousel = ({
   isImageRounded = false,
+  onGoToAlbum,
   items,
+  listType,
   title,
 }: ItemsCarouselProps) => {
+  // eslint-disable-next-line consistent-return
+  const renderItemCover = (item: ItemsListType): string => {
+    switch (listType) {
+      case ListType.Album:
+        return item.cover;
+      case ListType.Artist:
+        return item.cover;
+      case ListType.Song:
+        return item.album.cover;
+      default:
+        return '';
+    }
+  };
+
   const ListItem = ({
+    cover,
     isImageRounded,
-    item,
-  }: {
-    isImageRounded?: boolean;
-    item: Song;
-  }) => (
-    <Item>
-      <ItemImage isImageRounded={isImageRounded} source={{ uri: item.cover }} />
-      <ItemName numberOfLines={1}>{item.name}</ItemName>
+    onGoToAlbum,
+    name,
+  }: ListItemProps) => (
+    <Item onPress={() => onGoToAlbum(name)}>
+      <ItemImage isImageRounded={isImageRounded} source={{ uri: cover }} />
+      <ItemName numberOfLines={1}>{name}</ItemName>
     </Item>
   );
 
@@ -42,7 +74,12 @@ const ItemsCarousel = ({
         horizontal
         keyExtractor={item => item.name}
         renderItem={({ item }) => (
-          <ListItem isImageRounded={isImageRounded} item={item} />
+          <ListItem
+            cover={renderItemCover(item)}
+            isImageRounded={isImageRounded}
+            onGoToAlbum={onGoToAlbum}
+            name={item.name}
+          />
         )}
         showsHorizontalScrollIndicator={false}
       />
