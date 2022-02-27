@@ -4,14 +4,11 @@ import { Text } from '../../../components/Text/styles';
 import { colors, defaultPadding } from '../../../styles/styleguide';
 
 export const Container = styled.View`
-  flex: 1;
   background-color: ${colors.primaryBlue};
   padding-top: ${defaultPadding};
 `;
 
-export const ScrollView = styled.ScrollView`
-  flex-grow: 1;
-`;
+export const ScrollView = styled.ScrollView``;
 
 export const Greeting = styled(Text)`
   color: ${colors.white};

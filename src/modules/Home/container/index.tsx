@@ -26,7 +26,10 @@ const HomeContainer = ({
   userName,
 }: HomeContainerProps) => {
   const renderDefault = (
-    <ScrollView showsVerticalScrollIndicator={false}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{ paddingBottom: 56 }}
+    >
       <Greeting size={22}>Olá, {userName}</Greeting>
       <ItemsCarousel
         items={songs}

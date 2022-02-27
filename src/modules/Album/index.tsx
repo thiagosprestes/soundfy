@@ -30,6 +30,7 @@ const Album = ({ navigation, route }: AlbumProps) => {
 
   return (
     <AlbumContainer
+      artist={albumData?.artist!}
       componentState={componentState}
       cover={albumData?.cover!}
       name={albumData?.name!}

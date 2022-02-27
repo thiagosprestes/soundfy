@@ -21,10 +21,11 @@ import Error from '../../../components/Error';
 import Loading from '../../../components/Loading';
 import Back from '../../../assets/icons/back.svg';
 import OutlinedHeart from '../../../assets/icons/outlined-heart.svg';
-import Play from '../../../assets/icons/play.svg';
+import Play from '../../../assets/icons/play-background.svg';
 import { AlbumSong } from '../../Home/types';
 
 interface AlbumContainerProps {
+  artist: string;
   componentState: ComponentState;
   cover: string;
   name: string;
@@ -36,6 +37,7 @@ interface AlbumContainerProps {
 }
 
 const AlbumContainer = ({
+  artist,
   componentState,
   cover,
   name,
@@ -47,6 +49,7 @@ const AlbumContainer = ({
 }: AlbumContainerProps) => {
   const renderDefault = (
     <Songs
+      contentContainerStyle={{ paddingBottom: 56 }}
       ListHeaderComponent={() => (
         <Background
           source={{
@@ -59,7 +62,7 @@ const AlbumContainer = ({
                 <Back />
               </BackButton>
               <AlbumName>{name}</AlbumName>
-              <AlbumArtist>Alan Silvestri</AlbumArtist>
+              <AlbumArtist>{artist}</AlbumArtist>
               <AlbumActions>
                 <Action onPress={onPlayAlbum}>
                   <Play />

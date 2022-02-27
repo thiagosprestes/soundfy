@@ -4,8 +4,11 @@ import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Container, ItemContainer, Label } from './styles';
 import HomeIcon from '../../assets/icons/home.svg';
 import SearchIcon from '../../assets/icons/search.svg';
+import Library from '../../assets/icons/library.svg';
+import Settings from '../../assets/icons/settings.svg';
 import { colors } from '../../styles/styleguide';
 import { Routes } from '../../navigations/types/navigationTypes';
+import BottomPlayer from '../BottomPlayer';
 
 interface BottomBarItemProps extends BottomTabBarProps {}
 
@@ -35,12 +38,24 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
       return (
         <ItemContainer onPress={onPress}>
           {renderIconAndLabel.icon}
-          <Label>{renderIconAndLabel.label}</Label>
+          <Label color={iconColor}>{renderIconAndLabel.label}</Label>
         </ItemContainer>
       );
     });
 
-  return <Container>{BottomBarItem()}</Container>;
+  return (
+    <Container>
+      {BottomBarItem()}
+      <ItemContainer>
+        <Library fill={colors.grey} />
+        <Label>Biblioteca</Label>
+      </ItemContainer>
+      <ItemContainer>
+        <Settings fill={colors.grey} />
+        <Label>Configurações</Label>
+      </ItemContainer>
+    </Container>
+  );
 };
 
 export default BottomBar;
