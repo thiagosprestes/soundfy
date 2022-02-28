@@ -9,10 +9,18 @@ import Settings from '../../assets/icons/settings.svg';
 import { colors } from '../../styles/styleguide';
 import { Routes } from '../../navigations/types/navigationTypes';
 import BottomPlayer from '../BottomPlayer';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { showPlayer } from '../../modules/Home/slices/player';
 
 interface BottomBarItemProps extends BottomTabBarProps {}
 
 const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
+  const dispatch = useAppDispatch();
+
+  const isPlayerShow = useAppSelector(
+    globalState => globalState.player.isOpened,
+  );
+
   const BottomBarItem = () =>
     state.routes.map((route, index) => {
       const isFocused = state.index === index;
@@ -43,18 +51,25 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
       );
     });
 
+  const handleOnGoToPlayer = () => {
+    dispatch(showPlayer());
+  };
+
   return (
-    <Container>
-      {BottomBarItem()}
-      <ItemContainer>
-        <Library fill={colors.grey} />
-        <Label>Biblioteca</Label>
-      </ItemContainer>
-      <ItemContainer>
-        <Settings fill={colors.grey} />
-        <Label>Configurações</Label>
-      </ItemContainer>
-    </Container>
+    <>
+      {!isPlayerShow && <BottomPlayer onGoToPlayer={handleOnGoToPlayer} />}
+      <Container>
+        {BottomBarItem()}
+        <ItemContainer>
+          <Library fill={colors.grey} />
+          <Label>Biblioteca</Label>
+        </ItemContainer>
+        <ItemContainer>
+          <Settings fill={colors.grey} />
+          <Label>Configurações</Label>
+        </ItemContainer>
+      </Container>
+    </>
   );
 };
 

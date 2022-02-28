@@ -4,7 +4,6 @@ import { Routes } from './types/navigationTypes';
 import Home from '../modules/Home';
 import BottomBar from '../components/BottomBar';
 import HomeStack from '../modules/Home/navigation';
-import BottomPlayer from '../components/BottomPlayer';
 
 const Tab = createBottomTabNavigator();
 

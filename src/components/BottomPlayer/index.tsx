@@ -14,11 +14,15 @@ import {
   Player,
 } from './styles';
 
-const BottomPlayer: React.FC = () => {
+interface BottomPlayerProps {
+  onGoToPlayer: () => void;
+}
+
+const BottomPlayer = ({ onGoToPlayer }: BottomPlayerProps) => {
   const a = '';
 
   return (
-    <Container>
+    <Container onPress={onGoToPlayer}>
       <Player>
         <Cover
           source={{

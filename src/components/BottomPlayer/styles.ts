@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { colors } from '../../styles/styleguide';
 import { Text } from '../Text/styles';
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   margin: 0 24px;
 `;
 

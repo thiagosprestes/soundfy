@@ -1,9 +1,11 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import userSlice from '../modules/Login/slices/user';
+import playerSlice from '../modules/Home/slices/player';
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+    player: playerSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
