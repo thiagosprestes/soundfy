@@ -1,5 +1,5 @@
-import { StatusBar } from 'react-native';
 import styled from 'styled-components/native';
+import Slider from '@react-native-community/slider';
 import { Text } from '../../components/Text/styles';
 import { colors, defaultPadding } from '../../styles/styleguide';
 
@@ -46,11 +46,8 @@ export const Timestamp = styled(Text)`
   color: ${colors.white};
 `;
 
-export const PlayerProgress = styled.View`
+export const PlayerProgress = styled(Slider)`
   flex: 1;
-  height: 6px;
-  background-color: ${colors.secondaryBlue};
-  border-radius: 2px;
   margin: 0 8px;
 `;
 

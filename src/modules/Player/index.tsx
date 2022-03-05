@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { usePlaybackState } from 'react-native-track-player';
 import {
   Actions,
   Artist,
@@ -18,6 +19,8 @@ import Previous from '../../assets/icons/previous.svg';
 import Next from '../../assets/icons/next.svg';
 import Pause from '../../assets/icons/pause.svg';
 import { hidePlayer } from '../Home/slices/player';
+import { colors } from '../../styles/styleguide';
+import usePlayer from '../../hooks/usePlayer';
 
 interface PlayerProps {
   isVisible: boolean;
@@ -25,6 +28,16 @@ interface PlayerProps {
 
 const Player = ({ isVisible }: PlayerProps) => {
   const dispatch = useDispatch();
+  const {
+    onChangeTrackPosition,
+    onTogglePlayerState,
+    trackDuration,
+    trackPosition,
+  } = usePlayer();
+
+  const currentTrackTimestamp = new Date(trackPosition * 1000)
+    .toISOString()
+    .slice(14, 19);
 
   const handleOnClosePlayer = () => {
     dispatch(hidePlayer());
@@ -44,13 +57,25 @@ const Player = ({ isVisible }: PlayerProps) => {
         <Title>Teste</Title>
         <Artist>Teste</Artist>
         <PlayerData>
-          <Timestamp>0:00</Timestamp>
-          <PlayerProgress />
-          <Timestamp>0:00</Timestamp>
+          <Timestamp>{currentTrackTimestamp}</Timestamp>
+          <PlayerProgress
+            value={trackPosition}
+            minimumValue={0}
+            maximumValue={trackDuration}
+            thumbTintColor={colors.white}
+            minimumTrackTintColor={colors.secondaryBlue}
+            maximumTrackTintColor={colors.white}
+            onSlidingComplete={async value => {
+              await onChangeTrackPosition(value);
+            }}
+          />
+          <Timestamp>
+            {new Date(trackDuration * 1000).toISOString().slice(14, 19)}
+          </Timestamp>
         </PlayerData>
         <Actions>
           <Previous />
-          <PauseButton>
+          <PauseButton onPress={onTogglePlayerState}>
             <Pause height={30} width={30} />
           </PauseButton>
           <Next />
