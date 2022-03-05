@@ -26,7 +26,7 @@ const Album = ({ navigation, route }: AlbumProps) => {
 
   const handleOnToggleAlbumLike = () => {};
 
-  const handleOnToggleSongLike = () => {};
+  const handleOnToggleTrackLike = () => {};
 
   return (
     <AlbumContainer
@@ -37,8 +37,8 @@ const Album = ({ navigation, route }: AlbumProps) => {
       onBack={handleOnBack}
       onPlayAlbum={handleOnPlayAlbum}
       onToggleAlbumLike={handleOnToggleAlbumLike}
-      onToggleSongLike={handleOnToggleSongLike}
-      songs={albumData?.songs!}
+      onToggleTrackLike={handleOnToggleTrackLike}
+      tracks={albumData?.tracks!}
     />
   );
 };

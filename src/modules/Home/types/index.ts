@@ -1,10 +1,13 @@
-export interface Song {
+export interface Track {
+  index: number;
   name: string;
   artist?: string;
   album: Album;
+  duration: number;
+  url: any;
 }
 
-export interface AlbumSong {
+export interface AlbumTrack {
   name: string;
   artist?: string;
 }

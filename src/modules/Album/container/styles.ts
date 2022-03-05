@@ -57,11 +57,11 @@ export const Action = styled.TouchableOpacity`
   margin: 0 4px;
 `;
 
-export const Songs = styled.FlatList`
+export const Tracks = styled.FlatList`
   margin-top: 26px;
 ` as unknown as typeof FlatList;
 
-export const Song = styled.View`
+export const Track = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -69,7 +69,7 @@ export const Song = styled.View`
   padding: 0 ${defaultPadding};
 `;
 
-export const SongInfo = styled.View``;
+export const TrackInfo = styled.View``;
 
 export const Name = styled(Text)`
   margin-bottom: 4px;

@@ -7,12 +7,12 @@ export const Modal = styled.Modal``;
 
 export const Container = styled.View`
   background-color: ${colors.playerBackground};
-  height: 100%;
-  padding: ${defaultPadding};
+  flex: 1;
 `;
 
 export const BackButton = styled.TouchableOpacity`
   margin-bottom: 37px;
+  padding: ${defaultPadding} ${defaultPadding} 0;
 `;
 
 export const Cover = styled.Image`
@@ -57,6 +57,15 @@ export const Actions = styled.View`
   justify-content: center;
 `;
 
-export const PauseButton = styled.TouchableOpacity`
+export const TogglePlaybackStateButton = styled.TouchableOpacity`
   margin: 0 24px;
+`;
+
+export const ModalBody = styled.View`
+  justify-content: center;
+  flex: 1;
+`;
+
+export const TrackInfo = styled.View`
+  padding: 0 ${defaultPadding} ${defaultPadding};
 `;

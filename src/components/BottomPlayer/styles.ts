@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { colors } from '../../styles/styleguide';
 import { Text } from '../Text/styles';
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.View`
   margin: 0 24px;
 `;
 
@@ -18,11 +18,13 @@ export const Info = styled.View``;
 export const Name = styled(Text)`
   color: ${colors.white};
   font-weight: bold;
+  max-width: 180px;
 `;
 
 export const Artist = styled(Text)`
   color: ${colors.white};
   font-size: 12px;
+  max-width: 120px;
 `;
 
 export const Actions = styled.View`
@@ -32,7 +34,7 @@ export const Actions = styled.View`
   padding-right: 8px;
 `;
 
-export const Player = styled.View`
+export const Player = styled.TouchableOpacity`
   background-color: ${colors.playerBackground};
   border-radius: 8px;
   flex-direction: row;

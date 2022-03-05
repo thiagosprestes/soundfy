@@ -7,20 +7,21 @@ import {
   ItemsList,
   Title,
 } from './styles';
-import { Album, Artist, Song } from '../../types';
+import { Album, Artist, Track } from '../../types';
 
 export enum ListType {
   Album = 'Album',
   Artist = 'Artist',
-  Song = 'Song',
+  Track = 'Track',
 }
 
-export type ItemsListType = Album & Artist & Song;
+export type ItemsListType = Album & Artist & Track;
 
 interface ItemsCarouselProps {
   isImageRounded?: boolean;
   items: ItemsListType[];
-  onGoToAlbum: (albumName: string) => void;
+  onItemAction: (itemName: string) => void;
+  onPlayTrack: (track: Track, index: number) => void;
   listType: ListType;
   title: string;
 }
@@ -28,13 +29,15 @@ interface ItemsCarouselProps {
 interface ListItemProps {
   cover: string;
   isImageRounded?: boolean;
-  onGoToAlbum: (onGoToAlbum: string) => void;
+  onItemAction: () => void;
+  onPlayTrack: () => void;
   name: string;
 }
 
 const ItemsCarousel = ({
   isImageRounded = false,
-  onGoToAlbum,
+  onItemAction,
+  onPlayTrack,
   items,
   listType,
   title,
@@ -46,7 +49,7 @@ const ItemsCarousel = ({
         return item.cover;
       case ListType.Artist:
         return item.cover;
-      case ListType.Song:
+      case ListType.Track:
         return item.album.cover;
       default:
         return '';
@@ -56,10 +59,11 @@ const ItemsCarousel = ({
   const ListItem = ({
     cover,
     isImageRounded,
-    onGoToAlbum,
+    onItemAction,
+    onPlayTrack,
     name,
   }: ListItemProps) => (
-    <Item onPress={() => onGoToAlbum(name)}>
+    <Item onPress={listType === ListType.Track ? onPlayTrack : onItemAction}>
       <ItemImage isImageRounded={isImageRounded} source={{ uri: cover }} />
       <ItemName numberOfLines={1}>{name}</ItemName>
     </Item>
@@ -73,11 +77,12 @@ const ItemsCarousel = ({
         data={items}
         horizontal
         keyExtractor={item => item.name}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <ListItem
             cover={renderItemCover(item)}
             isImageRounded={isImageRounded}
-            onGoToAlbum={onGoToAlbum}
+            onItemAction={() => onItemAction(item.name)}
+            onPlayTrack={() => onPlayTrack(item, index)}
             name={item.name}
           />
         )}

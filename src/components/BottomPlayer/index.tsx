@@ -1,8 +1,10 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-
+import { State } from 'react-native-track-player';
 import OutlinedHeart from '../../assets/icons/outlined-heart.svg';
 import Pause from '../../assets/icons/pause.svg';
+import Play from '../../assets/icons/play.svg';
+import { Album } from '../../modules/Home/types';
 
 import {
   Actions,
@@ -15,35 +17,47 @@ import {
 } from './styles';
 
 interface BottomPlayerProps {
+  album: Album;
+  artist?: string;
+  name: string;
   onGoToPlayer: () => void;
+  onTogglePlayerState: () => void;
+  playbackState: State;
 }
 
-const BottomPlayer = ({ onGoToPlayer }: BottomPlayerProps) => {
-  const a = '';
-
-  return (
-    <Container onPress={onGoToPlayer}>
-      <Player>
-        <Cover
-          source={{
-            uri: 'https://upload.wikimedia.org/wikipedia/pt/3/36/Avengers_Endgame_trilha_sonora_capa.png',
-          }}
-        />
-        <Info>
-          <Name>Teste</Name>
-          <Artist>Test</Artist>
-        </Info>
-        <Actions>
-          <TouchableOpacity>
-            <OutlinedHeart height={26} widht={26} />
-          </TouchableOpacity>
-          <TouchableOpacity>
+const BottomPlayer = ({
+  album,
+  artist,
+  name,
+  onGoToPlayer,
+  onTogglePlayerState,
+  playbackState,
+}: BottomPlayerProps) => (
+  <Container>
+    <Player onPress={onGoToPlayer}>
+      <Cover
+        source={{
+          uri: album?.cover!,
+        }}
+      />
+      <Info>
+        <Name numberOfLines={1}>{name}</Name>
+        <Artist numberOfLines={1}>{artist}</Artist>
+      </Info>
+      <Actions>
+        <TouchableOpacity>
+          <OutlinedHeart height={26} widht={26} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onTogglePlayerState}>
+          {playbackState === State.Playing ? (
             <Pause />
-          </TouchableOpacity>
-        </Actions>
-      </Player>
-    </Container>
-  );
-};
+          ) : (
+            <Play height={18} width={18} />
+          )}
+        </TouchableOpacity>
+      </Actions>
+    </Player>
+  </Container>
+);
 
 export default BottomPlayer;

@@ -11,11 +11,21 @@ import { Routes } from '../../navigations/types/navigationTypes';
 import BottomPlayer from '../BottomPlayer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { showPlayer } from '../../modules/Home/slices/player';
+import usePlayer from '../../hooks/usePlayer';
 
 interface BottomBarItemProps extends BottomTabBarProps {}
 
 const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
   const dispatch = useAppDispatch();
+
+  const {
+    album,
+    artist,
+    name,
+    onTogglePlayerState,
+    playbackState,
+    shouldShowBottomPlayer,
+  } = usePlayer();
 
   const isPlayerShow = useAppSelector(
     globalState => globalState.player.isOpened,
@@ -57,7 +67,16 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
 
   return (
     <>
-      {!isPlayerShow && <BottomPlayer onGoToPlayer={handleOnGoToPlayer} />}
+      {!isPlayerShow && shouldShowBottomPlayer && (
+        <BottomPlayer
+          album={album}
+          artist={artist}
+          name={name}
+          onGoToPlayer={handleOnGoToPlayer}
+          onTogglePlayerState={onTogglePlayerState}
+          playbackState={playbackState}
+        />
+      )}
       <Container>
         {BottomBarItem()}
         <ItemContainer>

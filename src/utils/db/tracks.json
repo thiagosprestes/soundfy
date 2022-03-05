@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Welcome to Jurassic Park",
+    "album": {
+      "cover": "https://i.scdn.co/image/ab67616d0000b27392f051ce3c585b5c2db21d52"
+    },
+    "artist": "John Williams",
+    "url": "https://cdns-preview-0.dzcdn.net/stream/c-0a2b770685c947bc1b1d9d470b7813c2-7.mp3",
+    "duration": 31
+  },
+  {
+    "name": "Portals",
+    "album": {
+      "cover": "https://i.scdn.co/image/ab67616d0000b273ba70a3f1cc9aebbbc1fdfee1"
+    },
+    "artist": "Alan Silvestri",
+    "url": "https://cdns-preview-9.dzcdn.net/stream/c-9875690563c916b856769ade1f6c6217-8.mp3",
+    "duration": 31
+  },
+  {
+    "name": "Duel of the Fates",
+    "album": {
+      "cover": "https://i.scdn.co/image/ab67616d0000b2738b344822c35025ba9439f004"
+    },
+    "artist": "John Williams",
+    "url": "https://cdns-preview-0.dzcdn.net/stream/c-520b3cbaee9b51d9b97a61f52bde7f85-6.mp3",
+    "duration": 31
+  },
+  {
+    "name": "S.T.A.Y",
+    "album": {
+      "cover": "https://i.scdn.co/image/ab67616d0000b273ac29a65e7ffcfa6f9cb0d342"
+    },
+    "artist": "Hans Zimmer",
+    "url": "https://cdns-preview-0.dzcdn.net/stream/c-23694bcacc0b1204a099bc23a21d882b-5.mp3",
+    "duration": 31
+  },
+  {
+    "name": "Arrive to Earth",
+    "album": {
+      "cover": "https://i.scdn.co/image/ab67616d0000b273fb97e773be6149c9c935880c"
+    },
+    "artist": "Steve Jablonsky",
+    "url": "https://cdns-preview-0.dzcdn.net/stream/c-ea472dc4ae3be27593f5fa3e827e231d-8.mp3",
+    "duration": 31
+  }
+]

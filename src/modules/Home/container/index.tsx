@@ -7,13 +7,15 @@ import ItemsCarousel, {
 import { ComponentState } from '../../../utils/globalTypes';
 import Error from '../../../components/Error';
 import Loading from '../../../components/Loading';
+import { Track } from '../types';
 
 interface HomeContainerProps {
   albums: ItemsListType[];
   artists: ItemsListType[];
   componentState: ComponentState;
   onGoToAlbum: (albumName: string) => void;
-  songs: ItemsListType[];
+  onPlayTrack: (track: Track, index: number) => void;
+  tracks: ItemsListType[];
   userName: string;
 }
 
@@ -22,7 +24,8 @@ const HomeContainer = ({
   artists,
   componentState,
   onGoToAlbum,
-  songs,
+  onPlayTrack,
+  tracks,
   userName,
 }: HomeContainerProps) => {
   const renderDefault = (
@@ -32,21 +35,24 @@ const HomeContainer = ({
     >
       <Greeting size={22}>Olá, {userName}</Greeting>
       <ItemsCarousel
-        items={songs}
-        onGoToAlbum={onGoToAlbum}
-        listType={ListType.Song}
+        items={tracks}
+        onItemAction={() => undefined}
+        onPlayTrack={onPlayTrack}
+        listType={ListType.Track}
         title="Músicas em destaque"
       />
       <ItemsCarousel
         isImageRounded
-        onGoToAlbum={onGoToAlbum}
+        onItemAction={onGoToAlbum}
+        onPlayTrack={() => undefined}
         items={artists}
         listType={ListType.Artist}
         title="Artistas em destaque"
       />
       <ItemsCarousel
         items={albums}
-        onGoToAlbum={onGoToAlbum}
+        onItemAction={onGoToAlbum}
+        onPlayTrack={() => undefined}
         listType={ListType.Album}
         title="Trilhas sonoras épicas"
       />

@@ -12,9 +12,9 @@ import {
   Action,
   Artist,
   Name,
-  Song,
-  SongInfo,
-  Songs,
+  Track,
+  TrackInfo,
+  Tracks,
 } from './styles';
 import { ComponentState } from '../../../utils/globalTypes';
 import Error from '../../../components/Error';
@@ -22,7 +22,7 @@ import Loading from '../../../components/Loading';
 import Back from '../../../assets/icons/back.svg';
 import OutlinedHeart from '../../../assets/icons/outlined-heart.svg';
 import Play from '../../../assets/icons/play-background.svg';
-import { AlbumSong } from '../../Home/types';
+import { AlbumTrack } from '../../Home/types';
 
 interface AlbumContainerProps {
   artist: string;
@@ -32,8 +32,8 @@ interface AlbumContainerProps {
   onBack: () => void;
   onPlayAlbum: () => void;
   onToggleAlbumLike: (albumName: string) => void;
-  onToggleSongLike: (songName: string) => void;
-  songs: AlbumSong[];
+  onToggleTrackLike: (trackName: string) => void;
+  tracks: AlbumTrack[];
 }
 
 const AlbumContainer = ({
@@ -44,11 +44,11 @@ const AlbumContainer = ({
   onBack,
   onPlayAlbum,
   onToggleAlbumLike,
-  onToggleSongLike,
-  songs,
+  onToggleTrackLike,
+  tracks,
 }: AlbumContainerProps) => {
   const renderDefault = (
-    <Songs
+    <Tracks
       contentContainerStyle={{ paddingBottom: 56 }}
       ListHeaderComponent={() => (
         <Background
@@ -76,17 +76,17 @@ const AlbumContainer = ({
         </Background>
       )}
       keyExtractor={item => item.name}
-      data={songs}
+      data={tracks}
       renderItem={({ item }) => (
-        <Song>
-          <SongInfo>
+        <Track>
+          <TrackInfo>
             <Name>{item.name}</Name>
             <Artist>{item.artist}</Artist>
-          </SongInfo>
-          <TouchableOpacity onPress={() => onToggleSongLike(item.name)}>
+          </TrackInfo>
+          <TouchableOpacity onPress={() => onToggleTrackLike(item.name)}>
             <OutlinedHeart height={24} width={24} />
           </TouchableOpacity>
-        </Song>
+        </Track>
       )}
     />
   );
