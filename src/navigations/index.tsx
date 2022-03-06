@@ -19,10 +19,7 @@ const RootNavigation = () => {
           <AppNavigation />
         </>
       ) : (
-        <>
-          <Player isVisible={isPlayerShow} />
-          <AppNavigation />
-        </>
+        <AuthNavigation />
       )}
     </NavigationContainer>
   );

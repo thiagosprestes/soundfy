@@ -15,20 +15,22 @@ const useLike = () => {
     globalState => globalState.likedTracks,
   );
 
+  const userId = useAppSelector(globalState => globalState.user.uid);
+
   const onVerifyAlbumLiked = (albumName: string) => {
-    const isAlbumLiked = likedAlbums.find(
+    const isAlbumLiked = likedAlbums.albums.find(
       likedAlbum => likedAlbum === albumName,
     );
 
-    return Boolean(isAlbumLiked);
+    return Boolean(isAlbumLiked && likedAlbums.userId === userId);
   };
 
   const onVerifyTrackLiked = (trackName: string) => {
-    const isTrackLiked = likedTracks.find(
+    const isTrackLiked = likedTracks.tracks.find(
       likedTrack => likedTrack === trackName,
     );
 
-    return Boolean(isTrackLiked);
+    return Boolean(isTrackLiked && likedTracks.userId === userId);
   };
 
   const handleOnToggleAlbumLike = (albumName: string) => {
@@ -37,7 +39,7 @@ const useLike = () => {
     if (isAlbumLiked) {
       dispatch(removeAlbumLike(albumName));
     } else {
-      dispatch(likeAlbum(albumName));
+      dispatch(likeAlbum({ albumName, userId: userId! }));
     }
   };
 
@@ -47,7 +49,7 @@ const useLike = () => {
     if (isTrackLiked) {
       dispatch(removeLike(trackName));
     } else {
-      dispatch(likeTrack(trackName));
+      dispatch(likeTrack({ trackName, userId: userId! }));
     }
   };
 

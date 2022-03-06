@@ -44,10 +44,6 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
           icon: <HomeIcon fill={iconColor} />,
           label: 'Início',
         },
-        [Routes.App.Search]: {
-          icon: <SearchIcon fill={iconColor} />,
-          label: 'Buscar',
-        },
       }[route.name];
 
       const onPress = () => {
@@ -57,7 +53,7 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
       };
 
       return (
-        <ItemContainer onPress={onPress}>
+        <ItemContainer onPress={onPress} key={renderIconAndLabel.label}>
           {renderIconAndLabel.icon}
           <Label color={iconColor}>{renderIconAndLabel.label}</Label>
         </ItemContainer>
@@ -84,6 +80,10 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
       )}
       <Container>
         {BottomBarItem()}
+        <ItemContainer>
+          <SearchIcon fill={colors.grey} />
+          <Label>Buscar</Label>
+        </ItemContainer>
         <ItemContainer>
           <Library fill={colors.grey} />
           <Label>Biblioteca</Label>

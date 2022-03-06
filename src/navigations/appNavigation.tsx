@@ -13,7 +13,6 @@ const AppNavigation = () => (
     screenOptions={{ headerShown: false }}
   >
     <Tab.Screen name={Routes.App.HomeStack.itself} component={HomeStack} />
-    <Tab.Screen name={Routes.App.Search} component={Home} />
   </Tab.Navigator>
 );
 
