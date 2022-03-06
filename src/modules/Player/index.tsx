@@ -1,14 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { State } from 'react-native-track-player';
-import {
-  Animated,
-  Dimensions,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Dimensions, TouchableOpacity, View } from 'react-native';
 import {
   Actions,
   Artist,
@@ -47,7 +40,6 @@ const Player = ({ isVisible }: PlayerProps) => {
     onChangeTrackPosition,
     onTogglePlayerState,
     onPlayTrack,
-    onSkipTo,
     playbackState,
     trackDuration,
     trackPosition,
@@ -63,41 +55,13 @@ const Player = ({ isVisible }: PlayerProps) => {
     dispatch(hidePlayer());
   };
 
-  const { width } = Dimensions.get('window');
-
-  const [trackIndex, setTrackIndex] = useState(0);
-
-  const scrollX = useRef(new Animated.Value(0)).current;
-
-  const trackSlider = useRef<any>(null);
-
   const onSkipToNext = () => {
-    trackSlider.current.scrollToOffset({
-      offset: (trackIndex + 1) * width,
-    });
+    onPlayTrack(index + 1);
   };
 
   const onSkipToPrevious = () => {
-    trackSlider.current.scrollToOffset({
-      offset: (trackIndex - 1) * width,
-    });
+    onPlayTrack(index - 1);
   };
-
-  useEffect(() => {
-    if (index) setTrackIndex(index);
-  }, [index]);
-
-  useEffect(() => {
-    scrollX.addListener(({ value }) => {
-      const index = Math.round(value / width);
-      onSkipTo(index, tracks[index] as Track);
-      setTrackIndex(index);
-    });
-
-    return () => {
-      scrollX.removeAllListeners();
-    };
-  }, []);
 
   return (
     <Modal visible={isVisible} onRequestClose={handleOnClosePlayer}>
@@ -106,45 +70,14 @@ const Player = ({ isVisible }: PlayerProps) => {
           <Back />
         </BackButton>
         <ModalBody>
-          <View>
-            <Animated.FlatList
-              ref={trackSlider}
-              data={tracks}
-              renderItem={({ item, index }) => (
-                <View
-                  style={{
-                    width,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}
-                >
-                  <Cover
-                    source={{
-                      uri: tracks[trackIndex].album.cover,
-                    }}
-                  />
-                </View>
-              )}
-              keyExtractor={item => item.name}
-              horizontal
-              pagingEnabled
-              showsHorizontalScrollIndicator={false}
-              scrollEventThrottle={16}
-              onScroll={Animated.event(
-                [
-                  {
-                    nativeEvent: {
-                      contentOffset: { x: scrollX },
-                    },
-                  },
-                ],
-                { useNativeDriver: true },
-              )}
-            />
-          </View>
+          <Cover
+            source={{
+              uri: tracks[index].album.cover,
+            }}
+          />
           <TrackInfo>
-            <Title>{tracks[trackIndex].name}</Title>
-            <Artist>{tracks[trackIndex].artist}</Artist>
+            <Title>{tracks[index].name}</Title>
+            <Artist>{tracks[index].artist}</Artist>
             <PlayerData>
               <Timestamp>{currentTrackTimestamp}</Timestamp>
               <PlayerProgress

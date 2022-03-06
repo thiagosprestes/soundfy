@@ -21,7 +21,7 @@ interface ItemsCarouselProps {
   isImageRounded?: boolean;
   items: ItemsListType[];
   onItemAction: (itemName: string) => void;
-  onPlayTrack: (track: Track, index: number) => void;
+  onPlayTrack: (index: number) => void;
   listType: ListType;
   title: string;
 }
@@ -82,7 +82,7 @@ const ItemsCarousel = ({
             cover={renderItemCover(item)}
             isImageRounded={isImageRounded}
             onItemAction={() => onItemAction(item.name)}
-            onPlayTrack={() => onPlayTrack(item, index)}
+            onPlayTrack={() => onPlayTrack(index)}
             name={item.name}
           />
         )}

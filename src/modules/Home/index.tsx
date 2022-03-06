@@ -34,12 +34,12 @@ const Home = ({ navigation }: HomeProps) => {
   };
 
   const handleOnPlayTrack = (track: Track, index: number) => {
-    onPlayTrack(track, index);
+    onPlayTrack(index);
   };
 
   return (
     <HomeContainer
-      albums={albums as ItemsListType[]}
+      albums={albums as unknown as ItemsListType[]}
       artists={artists as ItemsListType[]}
       componentState={componentState}
       onGoToAlbum={handleOnGoToAlbum}

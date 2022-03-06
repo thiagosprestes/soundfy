@@ -1,10 +1,9 @@
 export interface Track {
-  index: number;
   name: string;
-  artist?: string;
+  artist: string;
   album: Album;
   duration: number;
-  url: any;
+  url: string;
 }
 
 export interface AlbumTrack {
