@@ -7,6 +7,7 @@ import TrackPlayer, {
   useProgress,
 } from 'react-native-track-player';
 import { playTrack } from '../modules/Home/slices/player';
+import { Track } from '../modules/Home/types';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import tracks from '../utils/db/tracks.json';
 
@@ -46,9 +47,7 @@ const usePlayer = () => {
     if (playbackState === State.Playing) await TrackPlayer.pause();
   };
 
-  const onPlayTrack = async (index: number) => {
-    const track = tracks[index];
-
+  const onPlayTrack = async (track: Track, index: number) => {
     await TrackPlayer.reset();
     await TrackPlayer.add({
       name: track.name,
@@ -63,16 +62,17 @@ const usePlayer = () => {
   useEffect(() => {
     setupPlayer();
 
-    return () => {
-      TrackPlayer.destroy();
-    };
+    // return () => {
+    //   console.log('VRAU');
+    //   TrackPlayer.destroy();
+    // };
   }, []);
 
-  useEffect(() => {
-    if (duration > 0 && duration === Math.round(position)) {
-      onPlayTrack(playerTrackIndex + 1);
-    }
-  }, [duration, position]);
+  // useEffect(() => {
+  //   if (duration > 0 && duration === Math.round(position)) {
+  //     onPlayTrack(tracks[playerTrackIndex + 1], playerTrackIndex + 1);
+  //   }
+  // }, [duration, position]);
 
   return {
     album,

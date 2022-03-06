@@ -34,7 +34,7 @@ const Home = ({ navigation }: HomeProps) => {
   };
 
   const handleOnPlayTrack = (track: Track, index: number) => {
-    onPlayTrack(index);
+    onPlayTrack(track, index);
   };
 
   return (

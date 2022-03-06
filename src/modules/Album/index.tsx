@@ -5,6 +5,9 @@ import AlbumContainer from './container';
 import { ComponentState } from '../../utils/globalTypes';
 import albums from '../../utils/db/albums.json';
 import { StackParamList } from '../../navigations/types/routeParams';
+import usePlayer from '../../hooks/usePlayer';
+import { Track } from '../Home/types';
+import { useAppSelector } from '../../store/hooks';
 
 interface AlbumProps {
   navigation: NativeStackNavigationProp<any>;
@@ -14,7 +17,11 @@ interface AlbumProps {
 const Album = ({ navigation, route }: AlbumProps) => {
   const [componentState, setComponentState] = useState(ComponentState.default);
 
+  const { onPlayTrack } = usePlayer();
+
   const { albumName } = route.params!;
+
+  const playingTrack = useAppSelector(globalState => globalState.player.track);
 
   const albumData = albums.find(album => album.name === albumName);
 
@@ -22,7 +29,19 @@ const Album = ({ navigation, route }: AlbumProps) => {
     navigation.goBack();
   };
 
-  const handleOnPlayAlbum = () => {};
+  const handleOnPlayAlbum = () => {
+    const findTrack = albumData!.tracks && albumData!.tracks[2];
+
+    const track = {
+      name: findTrack?.name,
+      artist: findTrack?.artist,
+      album: albumData,
+      duration: findTrack?.duration,
+      url: findTrack?.url,
+    };
+
+    onPlayTrack(track as Track, 2);
+  };
 
   const handleOnToggleAlbumLike = () => {};
 
@@ -38,6 +57,7 @@ const Album = ({ navigation, route }: AlbumProps) => {
       onPlayAlbum={handleOnPlayAlbum}
       onToggleAlbumLike={handleOnToggleAlbumLike}
       onToggleTrackLike={handleOnToggleTrackLike}
+      playingTrack={playingTrack}
       tracks={albumData?.tracks!}
     />
   );

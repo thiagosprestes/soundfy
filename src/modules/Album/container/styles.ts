@@ -4,6 +4,10 @@ import styled from 'styled-components/native';
 import { Text } from '../../../components/Text/styles';
 import { colors, defaultPadding } from '../../../styles/styleguide';
 
+interface TextProps {
+  isPlaying: boolean;
+}
+
 export const Container = styled.View`
   flex: 1;
   background-color: ${colors.primaryBlue};
@@ -71,13 +75,13 @@ export const Track = styled.View`
 
 export const TrackInfo = styled.View``;
 
-export const Name = styled(Text)`
+export const Name = styled(Text)<TextProps>`
   margin-bottom: 4px;
   font-weight: bold;
-  color: ${colors.white};
+  color: ${props => (props.isPlaying ? colors.secondaryBlue : colors.white)};
 `;
 
-export const Artist = styled(Text)`
+export const Artist = styled(Text)<TextProps>`
   font-size: 12px;
-  color: ${colors.white};
+  color: ${props => (props.isPlaying ? colors.secondaryBlue : colors.white)};
 `;

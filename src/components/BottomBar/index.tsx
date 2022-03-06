@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Container, ItemContainer, Label } from './styles';
 import HomeIcon from '../../assets/icons/home.svg';

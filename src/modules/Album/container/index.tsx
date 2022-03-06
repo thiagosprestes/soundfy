@@ -22,7 +22,7 @@ import Loading from '../../../components/Loading';
 import Back from '../../../assets/icons/back.svg';
 import OutlinedHeart from '../../../assets/icons/outlined-heart.svg';
 import Play from '../../../assets/icons/play-background.svg';
-import { AlbumTrack } from '../../Home/types';
+import { AlbumTrack, Track as TrackI } from '../../Home/types';
 
 interface AlbumContainerProps {
   artist: string;
@@ -33,6 +33,7 @@ interface AlbumContainerProps {
   onPlayAlbum: () => void;
   onToggleAlbumLike: (albumName: string) => void;
   onToggleTrackLike: (trackName: string) => void;
+  playingTrack: TrackI;
   tracks: AlbumTrack[];
 }
 
@@ -45,6 +46,7 @@ const AlbumContainer = ({
   onPlayAlbum,
   onToggleAlbumLike,
   onToggleTrackLike,
+  playingTrack,
   tracks,
 }: AlbumContainerProps) => {
   const renderDefault = (
@@ -80,8 +82,10 @@ const AlbumContainer = ({
       renderItem={({ item }) => (
         <Track>
           <TrackInfo>
-            <Name>{item.name}</Name>
-            <Artist>{item.artist}</Artist>
+            <Name isPlaying={playingTrack.name === item.name}>{item.name}</Name>
+            <Artist isPlaying={playingTrack.name === item.name}>
+              {item.artist}
+            </Artist>
           </TrackInfo>
           <TouchableOpacity onPress={() => onToggleTrackLike(item.name)}>
             <OutlinedHeart height={24} width={24} />

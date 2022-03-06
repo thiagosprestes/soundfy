@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { State } from 'react-native-track-player';
-import { Dimensions, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import {
   Actions,
   Artist,
@@ -26,7 +26,6 @@ import { hidePlayer } from '../Home/slices/player';
 import { colors } from '../../styles/styleguide';
 import usePlayer from '../../hooks/usePlayer';
 import tracks from '../../utils/db/tracks.json';
-import { Track } from '../Home/types';
 import { useAppSelector } from '../../store/hooks';
 
 interface PlayerProps {
@@ -37,6 +36,9 @@ const Player = ({ isVisible }: PlayerProps) => {
   const dispatch = useDispatch();
 
   const {
+    album,
+    artist,
+    name,
     onChangeTrackPosition,
     onTogglePlayerState,
     onPlayTrack,
@@ -56,11 +58,11 @@ const Player = ({ isVisible }: PlayerProps) => {
   };
 
   const onSkipToNext = () => {
-    onPlayTrack(index + 1);
+    onPlayTrack(tracks[index + 1], index + 1);
   };
 
   const onSkipToPrevious = () => {
-    onPlayTrack(index - 1);
+    onPlayTrack(tracks[index - 1], index - 1);
   };
 
   return (
@@ -72,12 +74,12 @@ const Player = ({ isVisible }: PlayerProps) => {
         <ModalBody>
           <Cover
             source={{
-              uri: tracks[index].album.cover,
+              uri: album && album.cover,
             }}
           />
           <TrackInfo>
-            <Title>{tracks[index].name}</Title>
-            <Artist>{tracks[index].artist}</Artist>
+            <Title>{name}</Title>
+            <Artist>{artist}</Artist>
             <PlayerData>
               <Timestamp>{currentTrackTimestamp}</Timestamp>
               <PlayerProgress
