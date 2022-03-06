@@ -21,6 +21,7 @@ import Error from '../../../components/Error';
 import Loading from '../../../components/Loading';
 import Back from '../../../assets/icons/back.svg';
 import OutlinedHeart from '../../../assets/icons/outlined-heart.svg';
+import Heart from '../../../assets/icons/heart.svg';
 import Play from '../../../assets/icons/play-background.svg';
 import { AlbumTrack, Track as TrackI } from '../../Home/types';
 
@@ -28,6 +29,8 @@ interface AlbumContainerProps {
   artist: string;
   componentState: ComponentState;
   cover: string;
+  isAlbumLiked: (albumName: string) => boolean;
+  isTrackLiked: (trackName: string) => boolean;
   name: string;
   onBack: () => void;
   onPlayAlbum: () => void;
@@ -41,6 +44,8 @@ const AlbumContainer = ({
   artist,
   componentState,
   cover,
+  isAlbumLiked,
+  isTrackLiked,
   name,
   onBack,
   onPlayAlbum,
@@ -70,7 +75,11 @@ const AlbumContainer = ({
                   <Play />
                 </Action>
                 <Action onPress={() => onToggleAlbumLike(name)}>
-                  <OutlinedHeart />
+                  {isAlbumLiked(name) ? (
+                    <Heart height={40} width={40} />
+                  ) : (
+                    <OutlinedHeart />
+                  )}
                 </Action>
               </AlbumActions>
             </AlbumHeader>
@@ -88,7 +97,11 @@ const AlbumContainer = ({
             </Artist>
           </TrackInfo>
           <TouchableOpacity onPress={() => onToggleTrackLike(item.name)}>
-            <OutlinedHeart height={24} width={24} />
+            {isTrackLiked(item.name) ? (
+              <Heart height={24} width={24} />
+            ) : (
+              <OutlinedHeart height={24} width={24} />
+            )}
           </TouchableOpacity>
         </Track>
       )}

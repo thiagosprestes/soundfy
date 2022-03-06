@@ -9,11 +9,15 @@ import {
 } from 'redux-persist';
 import userSlice from '../modules/Login/slices/user';
 import playerSlice from '../modules/Home/slices/player';
+import likedTracksSlice from '../slices/likedTracks';
+import likedAlbumsSlice from '../slices/likedAlbums';
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
     player: playerSlice,
+    likedTracks: likedTracksSlice,
+    likedAlbums: likedAlbumsSlice,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

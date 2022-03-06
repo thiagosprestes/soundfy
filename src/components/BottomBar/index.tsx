@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Container, ItemContainer, Label } from './styles';
 import HomeIcon from '../../assets/icons/home.svg';
@@ -12,6 +12,7 @@ import BottomPlayer from '../BottomPlayer';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { showPlayer } from '../../modules/Home/slices/player';
 import usePlayer from '../../hooks/usePlayer';
+import useLike from '../../hooks/useLike';
 
 interface BottomBarItemProps extends BottomTabBarProps {}
 
@@ -26,6 +27,8 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
     playbackState,
     shouldShowBottomPlayer,
   } = usePlayer();
+
+  const { handleOnToggleTrackLike, onVerifyTrackLiked } = useLike();
 
   const isPlayerShow = useAppSelector(
     globalState => globalState.player.isOpened,
@@ -71,9 +74,11 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
         <BottomPlayer
           album={album}
           artist={artist}
+          isTrackLiked={onVerifyTrackLiked}
           name={name}
           onGoToPlayer={handleOnGoToPlayer}
           onTogglePlayerState={onTogglePlayerState}
+          onToggleTrackLike={handleOnToggleTrackLike}
           playbackState={playbackState}
         />
       )}

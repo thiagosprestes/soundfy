@@ -8,6 +8,7 @@ import { StackParamList } from '../../navigations/types/routeParams';
 import usePlayer from '../../hooks/usePlayer';
 import { Track } from '../Home/types';
 import { useAppSelector } from '../../store/hooks';
+import useLike from '../../hooks/useLike';
 
 interface AlbumProps {
   navigation: NativeStackNavigationProp<any>;
@@ -18,6 +19,13 @@ const Album = ({ navigation, route }: AlbumProps) => {
   const [componentState, setComponentState] = useState(ComponentState.default);
 
   const { onPlayTrack } = usePlayer();
+
+  const {
+    handleOnToggleAlbumLike,
+    handleOnToggleTrackLike,
+    onVerifyAlbumLiked,
+    onVerifyTrackLiked,
+  } = useLike();
 
   const { albumName } = route.params!;
 
@@ -43,15 +51,13 @@ const Album = ({ navigation, route }: AlbumProps) => {
     onPlayTrack(track as Track, 2);
   };
 
-  const handleOnToggleAlbumLike = () => {};
-
-  const handleOnToggleTrackLike = () => {};
-
   return (
     <AlbumContainer
       artist={albumData?.artist!}
       componentState={componentState}
       cover={albumData?.cover!}
+      isAlbumLiked={onVerifyAlbumLiked}
+      isTrackLiked={onVerifyTrackLiked}
       name={albumData?.name!}
       onBack={handleOnBack}
       onPlayAlbum={handleOnPlayAlbum}
