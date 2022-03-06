@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import TrackPlayer, {
-  Capability,
-  Event,
   State,
   usePlaybackState,
   useProgress,
@@ -25,13 +23,6 @@ const usePlayer = () => {
   const { duration, position } = useProgress();
 
   const dispatch = useAppDispatch();
-
-  const setupPlayer = async () => {
-    await TrackPlayer.setupPlayer();
-    await TrackPlayer.updateOptions({
-      capabilities: [Capability.Play, Capability.Pause],
-    });
-  };
 
   const onChangeTrackPosition = async (value: number) => {
     await TrackPlayer.seekTo(value);
@@ -58,15 +49,6 @@ const usePlayer = () => {
 
     dispatch(playTrack({ track, index }));
   };
-
-  useEffect(() => {
-    setupPlayer();
-
-    // return () => {
-    //   console.log('VRAU');
-    //   TrackPlayer.destroy();
-    // };
-  }, []);
 
   // useEffect(() => {
   //   if (duration > 0 && duration === Math.round(position)) {

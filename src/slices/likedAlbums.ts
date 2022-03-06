@@ -1,40 +1,28 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface LikedAlbum {
-  userId: string;
-  albums: string[];
-}
-
-interface LikeAlbumAction {
-  albumName: string;
-  userId: string;
+  name: string;
+  userEmail: string;
 }
 
 interface InitialStateProps {
-  likedAlbums: LikedAlbum;
+  likedAlbums: LikedAlbum[];
 }
 
 const initialState: InitialStateProps = {
-  likedAlbums: {
-    userId: '',
-    albums: [],
-  },
+  likedAlbums: [],
 };
 
 const likedAlbumsSlice = createSlice({
   name: 'likedAlbums',
   initialState,
   reducers: {
-    likeAlbum(state, action: PayloadAction<LikeAlbumAction>) {
-      state.likedAlbums.albums = [
-        ...state.likedAlbums.albums,
-        action.payload.albumName,
-      ];
-      state.likedAlbums.userId = action.payload.userId;
+    likeAlbum(state, action: PayloadAction<LikedAlbum>) {
+      state.likedAlbums = [...state.likedAlbums, action.payload];
     },
     removeAlbumLike(state, action: PayloadAction<string>) {
-      state.likedAlbums.albums = state.likedAlbums.albums.filter(
-        album => album !== action.payload,
+      state.likedAlbums = state.likedAlbums.filter(
+        album => album.name !== action.payload,
       );
     },
   },

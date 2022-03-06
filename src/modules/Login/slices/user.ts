@@ -16,9 +16,13 @@ const userSlice = createSlice({
       state.displayName = action.payload.displayName;
       state.email = action.payload.email;
     },
+    removeUserData(state) {
+      state.displayName = '';
+      state.email = '';
+    },
   },
 });
 
-export const { storeUserData } = userSlice.actions;
+export const { storeUserData, removeUserData } = userSlice.actions;
 
 export default userSlice.reducer;

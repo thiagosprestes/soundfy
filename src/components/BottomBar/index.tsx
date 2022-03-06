@@ -1,6 +1,9 @@
 /* eslint-disable consistent-return */
 import React from 'react';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-community/google-signin';
+import { CommonActions } from '@react-navigation/native';
 import { Container, ItemContainer, Label } from './styles';
 import HomeIcon from '../../assets/icons/home.svg';
 import SearchIcon from '../../assets/icons/search.svg';
@@ -13,6 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { showPlayer } from '../../modules/Home/slices/player';
 import usePlayer from '../../hooks/usePlayer';
 import useLike from '../../hooks/useLike';
+import { removeUserData } from '../../modules/Login/slices/user';
 
 interface BottomBarItemProps extends BottomTabBarProps {}
 
@@ -64,6 +68,24 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
     dispatch(showPlayer());
   };
 
+  const handleOnLogout = async () => {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{ name: Routes.App.HomeStack.itself }],
+        }),
+      );
+
+      dispatch(removeUserData());
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       {!isPlayerShow && shouldShowBottomPlayer && (
@@ -88,9 +110,9 @@ const BottomBar = ({ navigation, state }: BottomBarItemProps) => {
           <Library fill={colors.grey} />
           <Label>Biblioteca</Label>
         </ItemContainer>
-        <ItemContainer>
+        <ItemContainer onPress={handleOnLogout}>
           <Settings fill={colors.grey} />
-          <Label>Configurações</Label>
+          <Label>Sair</Label>
         </ItemContainer>
       </Container>
     </>

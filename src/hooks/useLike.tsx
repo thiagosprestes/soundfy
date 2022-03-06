@@ -15,22 +15,24 @@ const useLike = () => {
     globalState => globalState.likedTracks,
   );
 
-  const userId = useAppSelector(globalState => globalState.user.uid);
+  const userEmail = useAppSelector(globalState => globalState.user.email);
 
   const onVerifyAlbumLiked = (albumName: string) => {
-    const isAlbumLiked = likedAlbums.albums.find(
-      likedAlbum => likedAlbum === albumName,
+    const isAlbumLiked = likedAlbums.find(
+      likedAlbum =>
+        likedAlbum.name === albumName && likedAlbum.userEmail === userEmail,
     );
 
-    return Boolean(isAlbumLiked && likedAlbums.userId === userId);
+    return Boolean(isAlbumLiked);
   };
 
   const onVerifyTrackLiked = (trackName: string) => {
-    const isTrackLiked = likedTracks.tracks.find(
-      likedTrack => likedTrack === trackName,
+    const isTrackLiked = likedTracks.find(
+      likedTrack =>
+        likedTrack.name === trackName && likedTrack.userEmail === userEmail,
     );
 
-    return Boolean(isTrackLiked && likedTracks.userId === userId);
+    return Boolean(isTrackLiked);
   };
 
   const handleOnToggleAlbumLike = (albumName: string) => {
@@ -39,7 +41,7 @@ const useLike = () => {
     if (isAlbumLiked) {
       dispatch(removeAlbumLike(albumName));
     } else {
-      dispatch(likeAlbum({ albumName, userId: userId! }));
+      dispatch(likeAlbum({ name: albumName, userEmail: userEmail! }));
     }
   };
 
@@ -49,7 +51,7 @@ const useLike = () => {
     if (isTrackLiked) {
       dispatch(removeLike(trackName));
     } else {
-      dispatch(likeTrack({ trackName, userId: userId! }));
+      dispatch(likeTrack({ name: trackName, userEmail: userEmail! }));
     }
   };
 
