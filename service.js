@@ -2,6 +2,7 @@
 import TrackPlayer from 'react-native-track-player';
 
 // service.js
+// eslint-disable-next-line func-names
 module.exports = async function () {
   TrackPlayer.addEventListener('remote-play', () => TrackPlayer.play());
 

@@ -34,6 +34,7 @@ interface AlbumContainerProps {
   name: string;
   onBack: () => void;
   onPlayAlbum: () => void;
+  onPlayTrack: (track: TrackI) => void;
   onToggleAlbumLike: (albumName: string) => void;
   onToggleTrackLike: (trackName: string) => void;
   playingTrack: TrackI;
@@ -49,6 +50,7 @@ const AlbumContainer = ({
   name,
   onBack,
   onPlayAlbum,
+  onPlayTrack,
   onToggleAlbumLike,
   onToggleTrackLike,
   playingTrack,
@@ -89,7 +91,7 @@ const AlbumContainer = ({
       keyExtractor={item => item.name}
       data={tracks}
       renderItem={({ item }) => (
-        <Track>
+        <Track onPress={() => onPlayTrack(item as TrackI)}>
           <TrackInfo>
             <Name isPlaying={playingTrack.name === item.name}>{item.name}</Name>
             <Artist isPlaying={playingTrack.name === item.name}>

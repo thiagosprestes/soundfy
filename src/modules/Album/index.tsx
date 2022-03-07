@@ -51,6 +51,18 @@ const Album = ({ navigation, route }: AlbumProps) => {
     onPlayTrack(track as Track, 2);
   };
 
+  const handleOnPlayTrack = (track: Track) => {
+    const trackData = {
+      name: track?.name,
+      artist: track?.artist,
+      album: albumData,
+      duration: track?.duration,
+      url: track?.url,
+    };
+
+    onPlayTrack(trackData as Track, 2);
+  };
+
   return (
     <AlbumContainer
       artist={albumData?.artist!}
@@ -61,6 +73,7 @@ const Album = ({ navigation, route }: AlbumProps) => {
       name={albumData?.name!}
       onBack={handleOnBack}
       onPlayAlbum={handleOnPlayAlbum}
+      onPlayTrack={handleOnPlayTrack}
       onToggleAlbumLike={handleOnToggleAlbumLike}
       onToggleTrackLike={handleOnToggleTrackLike}
       playingTrack={playingTrack}

@@ -65,7 +65,7 @@ export const Tracks = styled.FlatList`
   margin-top: 26px;
 ` as unknown as typeof FlatList;
 
-export const Track = styled.View`
+export const Track = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;

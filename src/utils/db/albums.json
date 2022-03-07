@@ -9,16 +9,16 @@
     "artist": "Ludwig Göransson",
     "tracks": [
       {
-        "name": "Wakanda Origins",
-        "artist": "Ludwig Göransson"
-      },
-      { "name": "Royal Talon Fighter", "artist": "Ludwig Göransson" },
-      {
         "name": "Wakanda",
         "artist": "Ludwig Göransson",
         "url": "https://cdns-preview-6.dzcdn.net/stream/c-6466e1b204cd897d0efaacbd57d06bb8-3.mp3",
         "duration": 31
       },
+      {
+        "name": "Wakanda Origins",
+        "artist": "Ludwig Göransson"
+      },
+      { "name": "Royal Talon Fighter", "artist": "Ludwig Göransson" },
       { "name": "Warrior Falls", "artist": "Ludwig Göransson" },
       { "name": "The Jabari", "artist": "Ludwig Göransson" },
       { "name": "Waterfall Fight", "artist": "Ludwig Göransson" },
