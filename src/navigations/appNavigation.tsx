@@ -10,8 +10,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigation = () => (
   <Tab.Navigator
     tabBar={props => <BottomBar {...props} />}
-    screenOptions={{ headerShown: false }}
-  >
+    screenOptions={{ headerShown: false }}>
     <Tab.Screen name={Routes.App.HomeStack.itself} component={HomeStack} />
   </Tab.Navigator>
 );

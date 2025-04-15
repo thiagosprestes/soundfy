@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { GoogleSignin } from '@react-native-community/google-signin';
 import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import LoginContainer from './container';
 import { storeUserData } from './slices/user';
 import { firebaseClientId } from '../../config/environmentVariables';
@@ -16,14 +16,11 @@ const Login = () => {
     setComponentState(ComponentState.loading);
 
     try {
-      const { idToken } = await GoogleSignin.signIn();
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      const response = await GoogleSignin.signIn();
 
-      const { user } = await auth().signInWithCredential(googleCredential);
+      const { name, email } = response.data?.user || {};
 
-      const { displayName, email } = user;
-
-      dispatch(storeUserData({ displayName, email }));
+      dispatch(storeUserData({ displayName: name, email }));
 
       setComponentState(ComponentState.default);
     } catch (error) {

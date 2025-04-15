@@ -25,7 +25,7 @@ interface BottomPlayerProps {
   onGoToPlayer: () => void;
   onTogglePlayerState: () => void;
   onToggleTrackLike: (trackName: string) => void;
-  playbackState: State;
+  playbackState?: State;
 }
 
 const BottomPlayer = ({
