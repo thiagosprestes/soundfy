@@ -20,7 +20,6 @@ Aplicativo desenvolvido com o proposito de aprender como manipular o player mús
 - [Tecnologias utilizadas](#-Tecnologias-utilizadas)
 - [Rodando o projeto](#-Rodando-o-projeto)
   - [Pré-requisitos](#-Pré-requisitos)
-  - [Rodando a auth-api](#-Rodando-o-app)
 
 ## 🎨 Telas
 
@@ -67,7 +66,7 @@ Com a máquina devidamente configurada para rodar projetos com React Native, clo
 ```bash
 
 # Clona o repositório
-git clone https://github.com/thiagosprestes/Spotify-clone-app-react.git
+git clone https://github.com/thiagosprestes/soundfy.git
 
 ```
 
