@@ -63,8 +63,7 @@ const AlbumContainer = ({
         <Background
           source={{
             uri: cover,
-          }}
-        >
+          }}>
           <Gradient colors={['transparent', '#00001c']}>
             <AlbumHeader>
               <BackButton onPress={onBack}>

@@ -9,17 +9,25 @@ import { store } from './src/store';
 
 function App() {
   const setupPlayer = async () => {
-    await TrackPlayer.setupPlayer();
-    await TrackPlayer.updateOptions({
-      capabilities: [Capability.Play, Capability.Pause],
-    });
+    let isPlayerInitialized = false;
+
+    try {
+      await TrackPlayer.setupPlayer();
+      await TrackPlayer.updateOptions({
+        capabilities: [Capability.Play, Capability.Pause],
+      });
+
+      isPlayerInitialized = true;
+    } catch (e) {
+      // intentionally leaved as blank
+    }
   };
 
   useEffect(() => {
     setupPlayer();
 
     return () => {
-      TrackPlayer.destroy();
+      TrackPlayer.reset();
     };
   }, []);
 

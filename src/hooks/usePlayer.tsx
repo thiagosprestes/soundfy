@@ -33,9 +33,9 @@ const usePlayer = () => {
 
     if (currentTrack === null) return;
 
-    if (playbackState === State.Paused) await TrackPlayer.play();
+    if (playbackState.state === State.Paused) await TrackPlayer.play();
 
-    if (playbackState === State.Playing) await TrackPlayer.pause();
+    if (playbackState.state === State.Playing) await TrackPlayer.pause();
   };
 
   const onPlayTrack = async (track: Track, index: number) => {
@@ -63,7 +63,7 @@ const usePlayer = () => {
     onChangeTrackPosition,
     onTogglePlayerState,
     onPlayTrack,
-    playbackState,
+    playbackState: playbackState.state,
     trackDuration: duration,
     trackPosition: position,
     shouldShowBottomPlayer: Boolean(name),

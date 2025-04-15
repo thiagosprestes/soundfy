@@ -1,9 +1,8 @@
 /* eslint-disable consistent-return */
 import React from 'react';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-community/google-signin';
 import { CommonActions } from '@react-navigation/native';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { Container, ItemContainer, Label } from './styles';
 import HomeIcon from '../../assets/icons/home.svg';
 import SearchIcon from '../../assets/icons/search.svg';
